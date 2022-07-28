@@ -1,0 +1,18 @@
+{
+  "name": "rest-api-express-mongo",
+  "version": "1.0.0",
+  "description": "mongodb database api using express",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "mlorberdev",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "mongodb": "^4.8.1",
+    "mongoose": "^6.5.0",
+    "nodemon": "^2.0.19"
+  }
+}

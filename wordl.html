@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>WORDL</title>
+
+	<style>
+		body {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100vw;
+			height: 100vh;
+			margin: 0;
+		}
+
+		#instructions {
+			position: fixed;
+			top: 3rem;
+			width: 100vw;
+			text-align: center;
+			font-style: italic;
+			flex-direction: column;
+		}
+
+		#instructions span {
+			padding: 1em;
+			width: 100%;
+			height: 25%;
+		}
+
+		#keyboard-container {
+			text-align: center;
+			user-select: none;
+			width: 100vw;
+			padding-top: 3rem;
+		}
+
+		button {
+			height: 45px;
+			width: 6%;
+			max-width: 90px;
+			margin: 3px;
+			border-radius: 4px;
+			color: #000;
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+			font-size: 1.2rem;
+			outline: none;
+			border: 1px solid black;
+			cursor: pointer;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			position: relative;
+			text-transform: capitalize;
+		}
+
+		button:active {
+			box-shadow: inset 0 0 3px black;
+		}
+
+		.wide {
+			width: 12%;
+			max-width: 90px;
+		}
+
+		#board-wrapper {
+			width: 100vw;
+			height: 100vh;
+			flex-flow: column;
+		}
+
+		.board-container {
+			display: grid;
+			gap: 1px;
+			grid-template-columns: 4rem 4rem 4rem 4rem 4rem;
+			grid-template-rows: 4rem 4rem 4rem 4rem 4rem 4rem;
+		}
+
+		.board-container div {
+			font-size: 2.5rem;
+			padding: 1rem;
+			border: 1px solid black;
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.flex {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.gray {
+			background-color: gray;
+		}
+
+		.gold {
+			background-color: goldenrod;
+		}
+
+		.green {
+			background-color: rgb(16, 138, 16);
+		}
+
+		.hidden {
+			visibility: hidden;
+		}
+
+		@media screen and (max-width:600px) {
+			
+		}
+	</style>
+</head>
+
+<body>
+	<div id="board-wrapper" class="flex">
+		<div id="wordl-board-container" class="board-container"></div>
+		<div id="keyboard-container"></div>
+	</div>
+	<div id="instructions" class="flex">
+		<!-- <span class="flex">Guess the word in six attempts</span>
+		<span class="gray flex">Letters not in the word are shown like this</span>
+		<span class="gold flex">Letters in the word but in the wrong place are shown like this</span>
+		<span class="green flex">Letters in the correct place are shown like this</span> -->
+	</div>
+</body>
+
+<script>
+
+	let word = "";
+	// GET WORD FROM WEB API
+	(function httpGetAsync() {
+		let request = new XMLHttpRequest();
+
+		request.open("GET", 'https://wordl-api-mlorberdev/api/getRandom', true); // true for asynchronous 
+		request.send(null);
+		request.onreadystatechange = () => {
+			if (request.readyState == 4 && request.status == 200) {
+				let result = JSON.parse(request.responseText);
+				for (let i = 0; i < 20; i++) { if (result[i].length === 5) { word = result[i]; break; } }
+				if (word === "") httpGetAsync();
+			}
+		}
+	})();
+
+	(function () {
+
+		// Gameboard
+		const frag = document.createDocumentFragment();
+		for (let i = 0; i < 30; i++) { frag.appendChild(document.createElement("div")); }
+		document.getElementById("wordl-board-container").appendChild(frag);
+
+		// Keyboard
+		const layout = ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "delete", "a", "s", "d", "f", "g", "h", "j", "k", "l", "enter", "z", "x", "c", "v", "b", "n", "m"];
+		const fragment = document.createDocumentFragment();
+		for (let i = 0; i < 28; i++) {
+			let key = document.createElement("button");
+			key.innerText = layout[i];
+			key.addEventListener("click", executeClick);
+			fragment.appendChild(key);
+			if (i === 10 || i === 20) { key.classList.add("wide"); fragment.appendChild(document.createElement("br")); }
+		}
+		document.getElementById("keyboard-container").appendChild(fragment);
+
+		// Variables
+		const cells = document.querySelectorAll(".board-container div");
+		const buttons = document.querySelectorAll("button");
+		const letters = [];
+		let row = 0;
+
+		// Gameplay
+		function executeClick() {
+			const key = this.innerText;
+			switch (key.length) {
+				case 5: if (5 * row + 5 !== letters.length) return; else { evalGuess(); row++; } break; // enter
+				case 6: if (5 * row === letters.length) return; else { letters.pop(); cells[letters.length].innerText = ""; } break; // delete
+				default: if (5 * row + 5 === letters.length) return; else { cells[letters.length].innerText = key; letters.push(key.toLowerCase()); } break;
+			}
+
+			function evalGuess() {
+				let color;
+				let check = letters.slice(-5).join('');
+				for (let i = 0; i < 5; i++) {
+					if (word.includes(check[i])) { word[i] !== check[i] ? color = "gold" : color = "green"; }
+					else { color = "gray"; }
+					buttons[layout.indexOf(check[i])].classList.add(color);
+					cells[5 * row + i].classList.add(color);
+				}
+				if (row === 5 || check === word) {
+					buttons.forEach(button => button.removeEventListener("click", executeClick));
+					if (row === 5 && check !== word) document.getElementById("instructions").innerHTML = `<span>The word was ${word}. <u><a href="" onclick="location.reload();">Play again?</a></u></span>`;
+					if (check === word) document.getElementById("instructions").innerHTML = `<span>You guessed the word in ${row + 1}</u> tries! <u><a href="" onclick="location.reload();">Play again?</a></u></span>`;
+				}
+			}
+		}
+
+	})();
+</script>
+
+</html>
