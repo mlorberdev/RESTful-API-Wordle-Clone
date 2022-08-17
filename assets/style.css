@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
+*{font-family:'Rubik';font-weight:900}
 body {
     margin: 0;
     position: absolute;
@@ -7,7 +9,7 @@ body {
     height: 100vh;
     overflow: hidden;
     z-index: 0;
-    background:rgb(207, 197, 197);
+    background:#111;
 }
 
 #keyboard-container {
@@ -18,29 +20,18 @@ body {
 }
 
 button {
-    height: 45px;
-    width: 6%;
-    margin: 3px;
-    border-radius: 4px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 1.2rem;
-    font-weight:bold;
-    border:none;
+    width: 7%;
+    padding:5px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     position: relative;
 }
-button:active {
-    box-shadow: 2px 2px 5px #00000033, 
-    -4px -4px 5px #ffffff55;
-}
 
 .wide {
     width: 12%;
-    max-width: 120px;
+    max-width: 120px
 }
-
 #board-wrapper {
     width: 100vw;
     height: 100vh;
@@ -52,14 +43,11 @@ button:active {
     gap: 1px;
     grid-template-columns: 4rem 4rem 4rem 4rem 4rem;
     grid-template-rows: 4rem 4rem 4rem 4rem 4rem 4rem;
-    gap:10px;
 }
 
 .board-container div {
     font-size: 2.5rem;
-    border-radius:4px;
     padding:1rem;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -73,31 +61,41 @@ button:active {
 .guess,
 button,
 .reload {
-    background-color: transparent;
-    box-shadow: 4px 4px 5px #00000033, 
-    -4px -4px 5px #ffffff55;
-    color:#22222277;
+    border:none;
+    margin:1px;
+    background-color: #22222255;
+    color: #666;
+}
+button {
+    font-size:1.1rem;
 }
 .reload {
-    padding:0 1rem;
+    padding:1rem;
     width:fit-content;
-    font-weight:normal;
 }
 .gray {
-    background-color: rgba(161, 158, 158, 0.7);
+    background-color: #222;
+    color:#444;
 }
 
 .gold {
-    background-color: rgba(196, 159, 67, .7);
+    background-color: #71771c;
+    color:#111;
 }
 
 .green {
-    background-color: rgba(44, 179, 44, .7);
+    background-color: #397e0c;
+    color:#111;
 }
 
 #instructions {
     position: fixed;
-    top: 40px;
+    top: 20px;
     width: 100vw;
     text-align: center;
+}
+
+.instr {
+    padding:10px 15px;
+    border-radius:5px;
 }

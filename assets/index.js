@@ -6,7 +6,6 @@
     Http.open("GET", url);
     Http.send();
     Http.onreadystatechange = (e) => {
-        console.log(Http.responseText);
         word = Http.responseText.split('"')[3];
     }
 		
@@ -20,7 +19,7 @@
     document.getElementById("wordl-board-container").appendChild(frag);
 
     // Keyboard
-    const layout = ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "delete", "a", "s", "d", "f", "g", "h", "j", "k", "l", "enter", "z", "x", "c", "v", "b", "n", "m"];
+    const layout = ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "del", "a", "s", "d", "f", "g", "h", "j", "k", "l", "ent", "z", "x", "c", "v", "b", "n", "m"];
     const fragment = document.createDocumentFragment();
     for (let i = 0; i < 28; i++) {
         let key = document.createElement("button");
@@ -41,9 +40,9 @@
     // Gameplay
     function executeClick() {
         const key = this.innerText;
-        switch (key.length) {
-            case 5: if (5 * row + 5 !== letters.length) return; else { evalGuess(); row++; } break; // enter
-            case 6: if (5 * row === letters.length) return; else { letters.pop(); cells[letters.length].innerText = ""; } break; // delete
+        switch (key) {
+            case "ENT": if (5 * row + 5 !== letters.length) return; else { evalGuess(); row++; } break;
+            case "DEL": if (5 * row === letters.length) return; else { letters.pop(); cells[letters.length].innerText = ""; } break;
             default: if (5 * row + 5 === letters.length) return; else { cells[letters.length].innerText = key; letters.push(key.toLowerCase()); } break;
         }
 
@@ -59,7 +58,7 @@
             if (row === 5 || check === word) {
                 buttons.forEach(button => button.removeEventListener("click", executeClick));
                 if (row === 5 && check !== word) document.getElementById("instructions").innerHTML = `<button class='shade reload' onclick='location.reload()'>The word was ${word}. Play again?</button>`;
-                if (check === word) document.getElementById("instructions").innerHTML = `<button class='shade reload' onclick='location.reload()'>You guessed the word in ${row + 1} tries! Play again?</button>`;
+                if (check === word) document.getElementById("instructions").innerHTML = `<button class='shade reload' onclick='location.reload()'>You got it in ${row + 1} tries! Play again?</button>`;
             }
         }
     }
