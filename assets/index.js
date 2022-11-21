@@ -1,13 +1,15 @@
 !(function () {
 
-    let word = "";
-    const Http = new XMLHttpRequest();
-    const url = 'https://wrdl-dictionary-api-nodejs.herokuapp.com/';
-    Http.open("GET", url);
-    Http.send();
-    Http.onreadystatechange = (e) => {
-        word = Http.responseText.split('"')[3];
-    }
+    // let word = "";
+    // const Http = new XMLHttpRequest();
+    // const url = 'https://wrdl-dictionary-api-nodejs.herokuapp.com/';
+    // Http.open("GET", url);
+    // Http.send();
+    // Http.onreadystatechange = (e) => {
+    //     word = Http.responseText.split('"')[3];
+    // }
+
+    let word = words[Math.floor(Math.random() * words.length)];
 		
     // Gameboard
     const frag = document.createDocumentFragment();
@@ -41,12 +43,26 @@
     function executeClick() {
         const key = this.innerText;
         switch (key) {
-            case "ENT": if (5 * row + 5 !== letters.length) return; else { evalGuess(); row++; } break;
+            case "ENT": if (5 * row + 5 !== letters.length) return; else { evalGuess(); row++} break;
             case "DEL": if (5 * row === letters.length) return; else { letters.pop(); cells[letters.length].innerText = ""; } break;
             default: if (5 * row + 5 === letters.length) return; else { cells[letters.length].innerText = key; letters.push(key.toLowerCase()); } break;
         }
 
         function evalGuess() {
+            let gg = letters.slice(-5).join("");
+            function isValidGuess(x) {
+                let hi = 8635;
+                let lo = 0;
+                let mm = 0;
+                while (lo <= hi) {
+                    mm = Math.floor((hi + lo) / 2);
+                    if (words[mm] === x) return true;
+                    else if (x > words[mm]) lo = mm + 1;
+                    else hi = mm - 1;
+                }
+                return false;
+            }
+            if (isValidGuess(gg) === false) { row--; document.body.classList.add("err"); setTimeout(()=>document.body.classList.remove("err"),500); return };
             let color;
             let check = letters.slice(-5).join('');
             for (let i = 0; i < 5; i++) {

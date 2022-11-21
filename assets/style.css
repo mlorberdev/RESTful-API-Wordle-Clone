@@ -9,9 +9,12 @@ body {
     height: 100vh;
     overflow: hidden;
     z-index: 0;
-    background:#111;
+    background-color:#555;
+    transition: background-color 1s linear;
 }
-
+.err {
+    background-color: #791919;
+}
 #keyboard-container {
     text-align: center;
     user-select: none;
