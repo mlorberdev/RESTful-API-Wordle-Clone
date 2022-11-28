@@ -122,6 +122,6 @@
 
     // Reset Statistics
     document.getElementById("reset").addEventListener("click", resetStats);
-    function resetStats() { localStorage.setItem("statistics", [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]); statsPageUpdate(); }
+    function resetStats() { localStorage.setItem("statistics", [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]); sx = localStorage.getItem("statistics"); statsPageUpdate(); }
 
 })();
