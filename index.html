@@ -6,10 +6,80 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>wordl</title>
-	<link rel="stylesheet" href="./assets/style.css"/>
+	<link rel="stylesheet" href="./assets/style.css" />
 </head>
 
 <body>
+	<svg id="statistics" width="30" height="30">
+		<g style="stroke:#555;stroke-width:1px">
+			<polygon points="0,10 10,10 10,30 0,30" />
+			<polygon points="10,0 20,0 20,30 10,30" />
+			<polygon points="20,15 30,15 30,30 20,30" />
+		</g>
+	</svg>
+	<div id="stats" style="display:none">
+		<div>
+			<table>
+				<tr>
+					<td><span>Played</span></td>
+					<td class="sta" id="pl">0</td>
+					<!-- hidden for #games won -->
+					<td class="sta" id="wo" style="display:none"></td>
+				</tr>
+				<tr>
+					<td><span>Win %</span></td>
+					<td class="sta" id="wp">0</td>
+				</tr>
+				<tr>
+					<td><span>Current Streak</span></td>
+					<td class="sta" id="cs">0</td>
+				</tr>
+				<tr>
+					<td><span>Max Streak</span></td>
+					<td class="sta" id="ms">0</td>
+				</tr>
+			</table>
+		</div>
+		<br><br>
+		<div>
+			<span>Guess Distribution</span>
+			<span>
+				<table id="dd">
+					<tr>
+						<td>1</td>
+						<td class="bar"></td>
+						<td class="sta" id="d1">0</td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td class="bar"></td>
+						<td class="sta" id="d2">0</td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td class="bar"></td>
+						<td class="sta" id="d3">0</td>
+					</tr>
+					<tr>
+						<td>4</td>
+						<td class="bar"></td>
+						<td class="sta" id="d4">0</td>
+					</tr>
+					<tr>
+						<td>5</td>
+						<td class="bar"></td>
+						<td class="sta" id="d5">0</td>
+					</tr>
+					<tr>
+						<td>6</td>
+						<td class="bar"></td>
+						<td class="sta" id="d6">0</td>
+					</tr>
+				</table>
+			</span>
+		</div>
+		<div id="reset">Reset Statistics</div>
+	</div>
 	<div id="instructions"></div>
 	<div id="board-wrapper" class="flex">
 		<div id="wordl-board-container" class="board-container"></div>

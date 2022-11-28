@@ -1,5 +1,6 @@
 !(function () {
 
+    // Rest API (old)
     // let word = "";
     // const Http = new XMLHttpRequest();
     // const url = 'https://wrdl-dictionary-api-nodejs.herokuapp.com/';
@@ -10,13 +11,13 @@
     // }
 
     let word = words[Math.floor(Math.random() * words.length)];
-		
+
     // Gameboard
     const frag = document.createDocumentFragment();
-    for (let i = 0; i < 30; i++) { 
+    for (let i = 0; i < 30; i++) {
         let dd = document.createElement("div");
         dd.classList.add("shade", "guess");
-        frag.appendChild(dd); 
+        frag.appendChild(dd);
     }
     document.getElementById("wordl-board-container").appendChild(frag);
 
@@ -34,16 +35,29 @@
     document.getElementById("keyboard-container").appendChild(fragment);
 
     // Variables
-    const cells = document.querySelectorAll(".board-container div");
-    const buttons = document.querySelectorAll("button");
     const letters = [];
     let row = 0;
+    const cells = document.querySelectorAll(".board-container div");
+    const buttons = document.querySelectorAll("button");
+    const stats = document.getElementById("stats");
+    let sx = localStorage.getItem("statistics");
+    console.log(word, sx);
+    if (sx === null) resetStats(); // for first-time user
+    sx = sx.split(","); // split text
+    sx.forEach(e => e = parseInt(e)); // change text to integer
+
+    // Update stats page
+    function statsPageUpdate() {
+        sx = localStorage.getItem("statistics").split(",");
+        const sss = ["pl", "wo", "wp", "cs", "ms", "d1", "d2", "d3", "d4", "d5", "d6"];
+        for (i in sss) document.getElementById(sss[i]).innerHTML = sx[i];
+    } statsPageUpdate();
 
     // Gameplay
     function executeClick() {
         const key = this.innerText;
         switch (key) {
-            case "ENT": if (5 * row + 5 !== letters.length) return; else { evalGuess(); row++} break;
+            case "ENT": if (5 * row + 5 !== letters.length) return; else { evalGuess(); row++ } break;
             case "DEL": if (5 * row === letters.length) return; else { letters.pop(); cells[letters.length].innerText = ""; } break;
             default: if (5 * row + 5 === letters.length) return; else { cells[letters.length].innerText = key; letters.push(key.toLowerCase()); } break;
         }
@@ -62,7 +76,7 @@
                 }
                 return false;
             }
-            if (isValidGuess(gg) === false) { row--; document.body.classList.add("err"); setTimeout(()=>document.body.classList.remove("err"),500); return };
+            if (isValidGuess(gg) === false) { row--; document.body.classList.add("err"); setTimeout(() => document.body.classList.remove("err"), 500); return };
             let color;
             let check = letters.slice(-5).join('');
             for (let i = 0; i < 5; i++) {
@@ -73,10 +87,41 @@
             }
             if (row === 5 || check === word) {
                 buttons.forEach(button => button.removeEventListener("click", executeClick));
-                if (row === 5 && check !== word) document.getElementById("instructions").innerHTML = `<button class='shade reload' onclick='location.reload()'>The word was ${word}. Play again?</button>`;
-                if (check === word) document.getElementById("instructions").innerHTML = `<button class='shade reload' onclick='location.reload()'>You got it in ${row + 1} tries! Play again?</button>`;
+                if (row === 5 && check !== word) {
+                    document.getElementById("instructions").innerHTML = `<button class='shade reload' onclick='location.reload()'>The word was ${word}. Play again?</button>`;
+                    updateStats(false);
+                }
+                if (check === word) {
+                    document.getElementById("instructions").innerHTML = `<button class='shade reload' onclick='location.reload()'>You got it in ${row + 1} tries! Play again?</button>`;
+                    updateStats(true, row + 1);
+                }
             }
         }
     }
+
+    // Show/Hide Statistics
+    document.getElementById("statistics").addEventListener("click", () => stats.style.display === "none" ? stats.style.display = "flex" : stats.style.display = "none");
+
+    // Update Statistics
+    function updateStats(win, row) {
+        // stat stored in localStorage as text
+        // sx -> "played, won, win%, curr streak, max streak, distribution (6)"
+        sx[0]++; // number played
+        if (win === true) {
+            sx[1]++; // wins
+            sx[3]++; // curr streak
+            if (sx[3] > sx[4]) sx[4] = sx[3]; // max streak update
+        } else {
+            sx[3] = 0; // reset current streak to 0
+        }
+        sx[2] = `${(100 * sx[1] / sx[0]).toFixed(0)}%`; // win pct
+        if (row > 0) sx[sx.length - 7 + row]++; // distribution update
+        localStorage.setItem("statistics", sx); // update localStorage (statistics)
+
+    }
+
+    // Reset Statistics
+    document.getElementById("reset").addEventListener("click", resetStats);
+    function resetStats() { localStorage.setItem("statistics", [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]); statsPageUpdate(); }
 
 })();
