@@ -117,11 +117,11 @@
         sx[2] = `${(100 * sx[1] / sx[0]).toFixed(0)}%`; // win pct
         if (row > 0) sx[sx.length - 7 + row]++; // distribution update
         localStorage.setItem("statistics", sx); // update localStorage (statistics)
-
+        statsPageUpdate();
     }
 
     // Reset Statistics
     document.getElementById("reset").addEventListener("click", resetStats);
-    function resetStats() { localStorage.setItem("statistics", [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]); sx = localStorage.getItem("statistics"); statsPageUpdate(); }
+    function resetStats() { localStorage.setItem("statistics", [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]); statsPageUpdate(); }
 
 })();
