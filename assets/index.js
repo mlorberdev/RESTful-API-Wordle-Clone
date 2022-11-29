@@ -41,7 +41,6 @@
     const buttons = document.querySelectorAll("button");
     const stats = document.getElementById("stats");
     let sx = localStorage.getItem("statistics");
-    console.log(word, sx);
     if (sx === null) resetStats(); // for first-time user
     sx = sx.split(","); // split text
     sx.forEach(e => e = parseInt(e)); // change text to integer
@@ -51,7 +50,7 @@
         sx = localStorage.getItem("statistics").split(",");
         const sss = ["pl", "wo", "wp", "cs", "ms", "d1", "d2", "d3", "d4", "d5", "d6"];
         const bbb = ["b1", "b2", "b3", "b4", "b5", "b6"];
-        let ht = parseInt(document.getElementById("bars").style.height) * parseFloat(getComputedStyle(document.documentElement).fontSize); console.log(ht);
+        let ht = parseInt(document.getElementById("bars").style.height) * parseFloat(getComputedStyle(document.documentElement).fontSize);
         for (i in sss) document.getElementById(sss[i]).innerHTML = sx[i];
         for (let i = 0; i < 6; i++) document.getElementById(bbb[i]).style.height = `${ht * parseInt(sx[i + 5]) / parseInt(sx[0]) }px`; // set bars' inner height to % of plays
     } statsPageUpdate();
