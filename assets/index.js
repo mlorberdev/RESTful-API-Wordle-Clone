@@ -40,14 +40,13 @@
     const cells = document.querySelectorAll(".board-container div");
     const buttons = document.querySelectorAll("button");
     const stats = document.getElementById("stats");
-    let sx = localStorage.getItem("statistics");
-    if (sx === null) resetStats(); // for first-time user
-    sx = sx.split(","); // split text
-    sx.forEach(e => e = parseInt(e)); // change text to integer
+    let sx;
+    if (localStorage.getItem("statistics") === null) resetStats(); // for first-time user
 
     // Update stats page
     function statsPageUpdate() {
         sx = localStorage.getItem("statistics").split(",");
+        sx.forEach(e => e = parseInt(e)); // change text to integer
         const sss = ["pl", "wo", "wp", "cs", "ms", "d1", "d2", "d3", "d4", "d5", "d6"];
         const bbb = ["b1", "b2", "b3", "b4", "b5", "b6"];
         let ht = parseInt(document.getElementById("bars").style.height) * parseFloat(getComputedStyle(document.documentElement).fontSize);
