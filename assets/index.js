@@ -50,7 +50,10 @@
     function statsPageUpdate() {
         sx = localStorage.getItem("statistics").split(",");
         const sss = ["pl", "wo", "wp", "cs", "ms", "d1", "d2", "d3", "d4", "d5", "d6"];
+        const bbb = ["b1", "b2", "b3", "b4", "b5", "b6"];
+        let ht = parseInt(document.getElementById("bars").style.height) * parseFloat(getComputedStyle(document.documentElement).fontSize); console.log(ht);
         for (i in sss) document.getElementById(sss[i]).innerHTML = sx[i];
+        for (let i = 0; i < 6; i++) document.getElementById(bbb[i]).style.height = `${ht * parseInt(sx[i + 5]) / parseInt(sx[0]) }px`; // set bars' inner height to % of plays
     } statsPageUpdate();
 
     // Gameplay

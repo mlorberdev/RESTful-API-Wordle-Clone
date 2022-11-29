@@ -9,7 +9,7 @@ body {
     height: 100vh;
     overflow: hidden;
     z-index: 0;
-    background-color:#555;
+    background-color:#ddd;
     transition: background-color 1s linear;
 }
 .err {
@@ -32,21 +32,58 @@ body {
     top:0;
     width:100vw;
     height:100vh;
-    background-color: #777;
+    background-color: #eee;
     z-index:9;
 }
-.sta {
-    padding:0 1rem;
-    border:1px solid black;
+#sta > td {
+    padding:1rem;
+    font-style: italic;
+}
+.top {
+    width:50vw;
+}
+.big > td {
+    width:25%
+}
+.big {
+    font-size: 3rem;
+    text-align: center;
+}
+.small {
+    text-align: center;
+}
+#distro {
+    width:50vw;
+    text-align: center;
+}
+#dn > td {
+    font-size: 2rem;
+}
+#bars {
+    height:7rem;
+}
+#bars > td {
+    vertical-align: bottom;
+}
+#bars > td > span {
+    display:block;
+    width:100%;
+    background-color: #111;
+    color:transparent;
+}
+.title {
+    padding:1rem;
 }
 #reset {
     position:fixed;
     bottom:1rem;
     left:1rem;
     cursor:pointer;
-    padding:1rem 2rem;
-    color:#888;
-    background-color: #444;
+    padding:.5rem 1.2rem;
+    color:#eee;
+    font-size: .7rem;
+    background-color: #111;
+    border-radius:1.5rem;
 }
 #keyboard-container {
     text-align: center;
@@ -100,7 +137,7 @@ button,
     border:none;
     margin:1px;
     background-color: #22222255;
-    color: #666;
+    color: #111;
 }
 button {
     font-size:1.1rem;
@@ -111,7 +148,7 @@ button {
 }
 .gray {
     background-color: #222;
-    color:#444;
+    color:#ddd;
 }
 
 .gold {

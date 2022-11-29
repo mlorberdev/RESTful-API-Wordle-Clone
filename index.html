@@ -19,66 +19,46 @@
 	</svg>
 	<div id="stats" style="display:none">
 		<div>
-			<table>
-				<tr>
-					<td><span>Played</span></td>
-					<td class="sta" id="pl">0</td>
+			<table class="top">
+				<tr class="big">
 					<!-- hidden for #games won -->
 					<td class="sta" id="wo" style="display:none"></td>
-				</tr>
-				<tr>
-					<td><span>Win %</span></td>
+					<td class="sta" id="pl">0</td>
 					<td class="sta" id="wp">0</td>
-				</tr>
-				<tr>
-					<td><span>Current Streak</span></td>
 					<td class="sta" id="cs">0</td>
-				</tr>
-				<tr>
-					<td><span>Max Streak</span></td>
 					<td class="sta" id="ms">0</td>
+				</tr>
+				<tr class="small">
+					<td><span>Played</span></td>
+					<td><span>Win %</span></td>
+					<td><span>Current Streak</span></td>
+					<td><span>Max Streak</span></td>
 				</tr>
 			</table>
 		</div>
 		<br><br>
 		<div>
-			<span>Guess Distribution</span>
-			<span>
-				<table id="dd">
-					<tr>
-						<td>1</td>
-						<td class="bar"></td>
-						<td class="sta" id="d1">0</td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td class="bar"></td>
-						<td class="sta" id="d2">0</td>
-					</tr>
-					<tr>
-						<td>3</td>
-						<td class="bar"></td>
-						<td class="sta" id="d3">0</td>
-					</tr>
-					<tr>
-						<td>4</td>
-						<td class="bar"></td>
-						<td class="sta" id="d4">0</td>
-					</tr>
-					<tr>
-						<td>5</td>
-						<td class="bar"></td>
-						<td class="sta" id="d5">0</td>
-					</tr>
-					<tr>
-						<td>6</td>
-						<td class="bar"></td>
-						<td class="sta" id="d6">0</td>
-					</tr>
-				</table>
-			</span>
+			<table id="distro">
+				<tr id="bars" style="height:6rem">
+					<td><span id="b1"><span id="d1"></span></span></td>
+					<td><span id="b2"><span id="d2"></span></span></td>
+					<td><span id="b3"><span id="d3"></span></span></td>
+					<td><span id="b4"><span id="d4"></span></span></td>
+					<td><span id="b5"><span id="d5"></span></span></td>
+					<td><span id="b6"><span id="d6"></span></span></td>
+				</tr>
+				<tr id="dn">
+					<td>1</td>
+					<td>2</td>
+					<td>3</td>
+					<td>4</td>
+					<td>5</td>
+					<td>6</td>
+				</tr>
+			</table>
+
 		</div>
-		<div id="reset">Reset Statistics</div>
+		<div id="reset">Reset</div>
 	</div>
 	<div id="instructions"></div>
 	<div id="board-wrapper" class="flex">
