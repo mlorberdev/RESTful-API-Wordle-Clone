@@ -1,6 +1,6 @@
 !(function () {
 
-    // Rest API (old)
+    // 5-Letter Word List Rest API (deprecated: heroku removed free hosting)
     // let word = "";
     // const Http = new XMLHttpRequest();
     // const url = 'https://wrdl-dictionary-api-nodejs.herokuapp.com/';
@@ -10,7 +10,20 @@
     //     word = Http.responseText.split('"')[3];
     // }
 
-    let word = words[Math.floor(Math.random() * words.length)];
+    // Load Random Word from Dictionary
+    let word = words[Math.floor(Math.random() * words.length)]; // pulls from words.js
+
+    // Lookup Word Rest API
+    const Http = new XMLHttpRequest();
+    const apikey = "3c16aff2-2881-4d91-8f22-84a75451848b"; // https://dictionaryapi.com/products/api-collegiate-dictionary
+    const url = `https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${apikey}`;
+    let def;
+    Http.open("GET", url);
+    Http.send();
+    Http.addEventListener("load", function () {
+        def = Http.responseText.toString().split("{bc}")[1].split('"]')[0];
+        console.log(def);
+    });
 
     // Gameboard
     const frag = document.createDocumentFragment();
@@ -41,6 +54,15 @@
     const buttons = document.querySelectorAll("button");
     const stats = document.getElementById("stats");
     let sx;
+    const d = new Date();
+    d.setTime(d.getTime() + 31536e6);
+    let expires = "expires=" + d.toUTCString();
+    document.cookie = "wordlestats" + "=" + "cvalue" + ";" + expires + ";path=/";
+    let cookies = decodeURIComponent(document.cookie).split(";");
+    // cookies.forEach()
+    console.log(sx, expires);
+    console.log(word);
+
     if (localStorage.getItem("statistics") === null) resetStats(); // for first-time user
 
     // Update stats page
@@ -51,7 +73,7 @@
         const bbb = ["b1", "b2", "b3", "b4", "b5", "b6"];
         let ht = parseInt(document.getElementById("bars").style.height) * parseFloat(getComputedStyle(document.documentElement).fontSize);
         for (i in sss) document.getElementById(sss[i]).innerHTML = sx[i];
-        for (let i = 0; i < 6; i++) document.getElementById(bbb[i]).style.height = `${ht * parseInt(sx[i + 5]) / parseInt(sx[0]) }px`; // set bars' inner height to % of plays
+        for (let i = 0; i < 6; i++) document.getElementById(bbb[i]).style.height = `${ht * parseInt(sx[i + 5]) / parseInt(sx[0])}px`; // set bars' inner height to % of plays
     } statsPageUpdate();
 
     // Gameplay
@@ -89,11 +111,11 @@
             if (row === 5 || check === word) {
                 buttons.forEach(button => button.removeEventListener("click", executeClick));
                 if (row === 5 && check !== word) {
-                    document.getElementById("instructions").innerHTML = `<button class='shade reload' onclick='location.reload()'>The word was ${word}. Play again?</button>`;
+                    document.getElementById("instructions").innerHTML = `<button class='shade reload' onclick='location.reload()'>The word was ${word}:<br>${def}.<br>Play again?</button>`;
                     updateStats(false);
                 }
                 if (check === word) {
-                    document.getElementById("instructions").innerHTML = `<button class='shade reload' onclick='location.reload()'>You got it in ${row + 1} tries! Play again?</button>`;
+                    document.getElementById("instructions").innerHTML = `<button class='shade reload' onclick='location.reload()'>You got it in ${row + 1} tries!<br>${def}<br>Play again?</button>`;
                     updateStats(true, row + 1);
                 }
             }
