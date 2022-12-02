@@ -162,10 +162,15 @@ button {
 }
 
 #instructions {
+    cursor:default;
+    user-select: none;
     position: fixed;
     top: 20px;
     width: 100vw;
     text-align: center;
+    display:flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .instr {

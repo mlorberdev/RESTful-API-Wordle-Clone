@@ -21,8 +21,11 @@
     Http.open("GET", url);
     Http.send();
     Http.addEventListener("load", function () {
-        def = Http.responseText.toString().split("{bc}")[1].split('"]')[0].replace(/\W/g, ' '); // mw
-        console.log(def);
+        try {
+            def = Http.responseText.toString().split("{bc}")[1].split('"]')[0].replace(/\W/g, ' '); // mw
+        } catch (e) {
+            def = `<a href='https://en.wiktionary.org/wiki/${word}' target='_blank'>Define ${word} on Wiktionary ↗</a>`; // if not in mw, give link
+        }
     });
 
     // Oxford Dictionary API Call (for word definition)
@@ -80,8 +83,6 @@
     document.cookie = "wordlestats" + "=" + "cvalue" + ";" + expires + ";path=/";
     let cookies = decodeURIComponent(document.cookie).split(";");
     // cookies.forEach(c => c = )
-    console.log(sx, expires);
-    console.log(word);
 
     if (localStorage.getItem("statistics") === null) resetStats(); // for first-time user
 
@@ -131,11 +132,11 @@
             if (row === 5 || check === word) {
                 buttons.forEach(button => button.removeEventListener("click", executeClick));
                 if (row === 5 && check !== word) {
-                    document.getElementById("instructions").innerHTML = `<button class='shade reload' onclick='location.reload()'>The word was ${word}:<br>${def}.<br>Play again?</button>`;
+                    document.getElementById("instructions").innerHTML = `<div class='shade reload' onclick='location.reload()'>The word was ${word}:<br>${def}<br>Play again?</div>`;
                     updateStats(false);
                 }
                 if (check === word) {
-                    document.getElementById("instructions").innerHTML = `<button class='shade reload' onclick='location.reload()'>You got it in ${row + 1} tries!<br>${def}<br>Play again?</button>`;
+                    document.getElementById("instructions").innerHTML = `<div class='shade reload' onclick='location.reload()'>You got it in ${row + 1} tries!<br>${def}<br>Play again?</div>`;
                     updateStats(true, row + 1);
                 }
             }
