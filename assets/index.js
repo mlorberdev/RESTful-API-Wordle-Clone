@@ -15,13 +15,16 @@
 
     // Lookup Word Rest API
     const Http = new XMLHttpRequest();
-    const apikey = "3c16aff2-2881-4d91-8f22-84a75451848b"; // https://dictionaryapi.com/products/api-collegiate-dictionary
-    const url = `https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${apikey}`;
+    // const apikey = "3c16aff2-2881-4d91-8f22-84a75451848b"; // mw dictionary: https://dictionaryapi.com/products/api-collegiate-dictionary
+    const apikey = 91699178; // oxford
+    // const url = `https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${apikey}`; // mw
+    const url = `https://od-api.oxforddictionaries.com/api/v2/entries/en-gb/${word}`; // oxford
     let def;
     Http.open("GET", url);
     Http.send();
     Http.addEventListener("load", function () {
-        def = Http.responseText.toString().split("{bc}")[1].split('"]')[0];
+        // def = Http.responseText.toString().split("{bc}")[1].split('"]')[0].replace(/\W/g, ' '); // mw
+        def = Http.responseText.toString();
         console.log(def);
     });
 
@@ -59,7 +62,7 @@
     let expires = "expires=" + d.toUTCString();
     document.cookie = "wordlestats" + "=" + "cvalue" + ";" + expires + ";path=/";
     let cookies = decodeURIComponent(document.cookie).split(";");
-    // cookies.forEach()
+    // cookies.forEach(c => c = )
     console.log(sx, expires);
     console.log(word);
 
