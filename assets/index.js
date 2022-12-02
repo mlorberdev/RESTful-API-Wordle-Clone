@@ -13,20 +13,37 @@
     // Load Random Word from Dictionary
     let word = words[Math.floor(Math.random() * words.length)]; // pulls from words.js
 
-    // Lookup Word Rest API
-    const Http = new XMLHttpRequest();
+    // Merriam-Webster API Call (for word definition)
+    // const Http = new XMLHttpRequest();
     // const apikey = "3c16aff2-2881-4d91-8f22-84a75451848b"; // mw dictionary: https://dictionaryapi.com/products/api-collegiate-dictionary
-    const apikey = 91699178; // oxford
     // const url = `https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${apikey}`; // mw
-    const url = `https://od-api.oxforddictionaries.com/api/v2/entries/en-gb/${word}`; // oxford
-    let def;
-    Http.open("GET", url);
-    Http.send();
-    Http.addEventListener("load", function () {
-        // def = Http.responseText.toString().split("{bc}")[1].split('"]')[0].replace(/\W/g, ' '); // mw
-        def = Http.responseText.toString();
-        console.log(def);
-    });
+    // let def;
+    // Http.open("GET", url);
+    // Http.send();
+    // Http.addEventListener("load", function () {
+    //     def = Http.responseText.toString().split("{bc}")[1].split('"]')[0].replace(/\W/g, ' '); // mw
+    //     console.log(def);
+    // });
+
+    // Oxford Dictionary API Call (for word definition)
+    function getDef() {
+        console.log("sending", word);
+        const app_id = "91699178"; // APP Id
+        const app_key = "c7f64de752019e7b91606c32244c0162"; // APP Key
+        const Http = new XMLHttpRequest();
+        const url = `https://www.od-api.oxforddictionaries.com:443/api/v2/entries/en-gb/${word}`;
+        let def;
+        Http.open("GET", url);
+        Http.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+        Http.setRequestHeader("app_id", app_id);
+        Http.setRequestHeader("app_key", app_key);
+        Http.send();
+        Http.addEventListener("load", function () {
+            def = Http.responseText.toString();
+            console.log(def);
+        });
+    } getDef();
+
 
     // Gameboard
     const frag = document.createDocumentFragment();
