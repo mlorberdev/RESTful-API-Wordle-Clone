@@ -103,7 +103,6 @@ button {
 
 .wide {
     width: 12%;
-    max-width: 120px
 }
 #board-wrapper {
     width: 100vw;
@@ -145,6 +144,7 @@ button {
 .reload {
     padding:1rem;
     width:fit-content;
+    min-height:4rem;
 }
 .gray {
     background-color: #444;

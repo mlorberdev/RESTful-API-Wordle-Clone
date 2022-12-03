@@ -15,7 +15,7 @@
 
     // Merriam-Webster API Call (for word definition)
     const Http = new XMLHttpRequest();
-    const apikey = "3c16aff2-2881-4d91-8f22-84a75451848b"; // mw dictionary: https://dictionaryapi.com/products/api-collegiate-dictionary
+    const apikey = "3c16aff2-2881-4d91-8f22-84a75451848b"; // mw dictionary
     const url = `https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${apikey}`; // mw
     let def;
     Http.open("GET", url);
@@ -28,27 +28,7 @@
         }
     });
 
-    // Oxford Dictionary API Call (for word definition)
-    // function getDef() {
-    //     console.log("sending", word);
-    //     const app_id = "91699178"; // APP Id
-    //     const app_key = "c7f64de752019e7b91606c32244c0162"; // APP Key
-    //     const Http = new XMLHttpRequest();
-    //     const url = `https://www.od-api.oxforddictionaries.com:443/api/v2/entries/en-gb/${word}`;
-    //     let def;
-    //     Http.open("GET", url);
-    //     Http.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-    //     Http.setRequestHeader("app_id", app_id);
-    //     Http.setRequestHeader("app_key", app_key);
-    //     Http.send();
-    //     Http.addEventListener("load", function () {
-    //         def = Http.responseText.toString();
-    //         console.log(def);
-    //     });
-    // } getDef();
-
-
-    // Gameboard
+    // Gameboard Setup
     const frag = document.createDocumentFragment();
     for (let i = 0; i < 30; i++) {
         let dd = document.createElement("div");
@@ -57,7 +37,7 @@
     }
     document.getElementById("wordl-board-container").appendChild(frag);
 
-    // Keyboard
+    // Keyboard Setup
     const layout = ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "del", "a", "s", "d", "f", "g", "h", "j", "k", "l", "ent", "z", "x", "c", "v", "b", "n", "m"];
     const fragment = document.createDocumentFragment();
     for (let i = 0; i < 28; i++) {
@@ -77,12 +57,13 @@
     const buttons = document.querySelectorAll("button");
     const stats = document.getElementById("stats");
     let sx;
-    const d = new Date();
-    d.setTime(d.getTime() + 31536e6);
-    let expires = "expires=" + d.toUTCString();
-    document.cookie = "wordlestats" + "=" + "cvalue" + ";" + expires + ";path=/";
-    let cookies = decodeURIComponent(document.cookie).split(";");
+    // const d = new Date();
+    // d.setTime(d.getTime() + 31536e6);
+    // let expires = "expires=" + d.toUTCString();
+    // document.cookie = "wordlestats" + "=" + "cvalue" + ";" + expires + ";path=/";
+    // let cookies = decodeURIComponent(document.cookie).split(";");
     // cookies.forEach(c => c = )
+    console.log(document.cookie);
 
     if (localStorage.getItem("statistics") === null) resetStats(); // for first-time user
 
@@ -132,11 +113,11 @@
             if (row === 5 || check === word) {
                 buttons.forEach(button => button.removeEventListener("click", executeClick));
                 if (row === 5 && check !== word) {
-                    document.getElementById("instructions").innerHTML = `<div class='shade reload' onclick='location.reload()'>The word was ${word}:<br>${def}<br>Play again?</div>`;
+                    document.getElementById("instructions").innerHTML = `<div class='shade reload' onclick='location.reload()'>The word was ${word}:<br>Play again?</div><div class='shade reload'>${word}: ${def}</div>`;
                     updateStats(false);
                 }
                 if (check === word) {
-                    document.getElementById("instructions").innerHTML = `<div class='shade reload' onclick='location.reload()'>You got it in ${row + 1} tries!<br>${def}<br>Play again?</div>`;
+                    document.getElementById("instructions").innerHTML = `<div class='shade reload' onclick='location.reload()'>You got it in ${row + 1} tries!<br>Play again?</div><div class='shade reload'>${word}: ${def}</div>`;
                     updateStats(true, row + 1);
                 }
             }
