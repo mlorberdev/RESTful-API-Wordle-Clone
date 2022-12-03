@@ -141,10 +141,18 @@ button,
 button {
     font-size:1.1rem;
 }
-.reload {
+.reload,
+.big {
     padding:1rem;
     width:fit-content;
-    min-height:4rem;
+    cursor: pointer;
+}
+.def {
+    position: fixed;
+    bottom: 1rem;
+}
+.big {
+    font-size:2rem;
 }
 .gray {
     background-color: #444;

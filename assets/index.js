@@ -12,21 +12,21 @@
 
     // Load Random Word from Dictionary
     let word = words[Math.floor(Math.random() * words.length)]; // pulls from words.js
-
+    
     // Merriam-Webster API Call (for word definition)
-    const Http = new XMLHttpRequest();
-    const apikey = "3c16aff2-2881-4d91-8f22-84a75451848b"; // mw dictionary
-    const url = `https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${apikey}`; // mw
-    let def;
-    Http.open("GET", url);
-    Http.send();
-    Http.addEventListener("load", function () {
-        try {
-            def = Http.responseText.toString().split("{bc}")[1].split('"]')[0].replace(/\W/g, ' '); // mw
-        } catch (e) {
-            def = `<a href='https://en.wiktionary.org/wiki/${word}' target='_blank'>Define ${word} on Wiktionary ↗</a>`; // if not in mw, give link
-        }
-    });
+    // const Http = new XMLHttpRequest();
+    // const apikey = "3c16aff2-2881-4d91-8f22-84a75451848b"; // mw dictionary
+    // const url = `https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${apikey}`; // mw
+    // let def;
+    // Http.open("GET", url);
+    // Http.send();
+    // Http.addEventListener("load", function () {
+    //     try {
+    //         def = Http.responseText; //.toString().split("{bc}")[1].split('"]')[0]; // mw
+    //     } catch (e) {
+    //         def = `<a href='https://en.wiktionary.org/wiki/${word}' target='_blank'>Define ${word} on Wiktionary ↗</a>`; // if not in mw, give link
+    //     }
+    // });
 
     // Gameboard Setup
     const frag = document.createDocumentFragment();
@@ -51,6 +51,7 @@
     document.getElementById("keyboard-container").appendChild(fragment);
 
     // Variables
+    def = `<a href='https://en.wiktionary.org/wiki/${word}' target='_blank'>Lookup this word on Wiktionary ↗</a>`;
     const letters = [];
     let row = 0;
     const cells = document.querySelectorAll(".board-container div");
@@ -63,7 +64,7 @@
     // document.cookie = "wordlestats" + "=" + "cvalue" + ";" + expires + ";path=/";
     // let cookies = decodeURIComponent(document.cookie).split(";");
     // cookies.forEach(c => c = )
-    console.log(document.cookie);
+    // console.log(document.cookie);
 
     if (localStorage.getItem("statistics") === null) resetStats(); // for first-time user
 
@@ -113,11 +114,11 @@
             if (row === 5 || check === word) {
                 buttons.forEach(button => button.removeEventListener("click", executeClick));
                 if (row === 5 && check !== word) {
-                    document.getElementById("instructions").innerHTML = `<div class='shade reload' onclick='location.reload()'>The word was ${word}:<br>Play again?</div><div class='shade reload'>${word}: ${def}</div>`;
+                    document.getElementById("instructions").innerHTML = `<div class='shade reload' onclick='location.reload()'>The word was ${word.toUpperCase()}.<br>Play again?</div><div class='def'>${def}</div>`;
                     updateStats(false);
                 }
                 if (check === word) {
-                    document.getElementById("instructions").innerHTML = `<div class='shade reload' onclick='location.reload()'>You got it in ${row + 1} tries!<br>Play again?</div><div class='shade reload'>${word}: ${def}</div>`;
+                    document.getElementById("instructions").innerHTML = `<div class='shade reload' onclick='location.reload()'>You got it in ${row + 1} tries!<br>Play again?</div><div class='def'>${def}</div>`;
                     updateStats(true, row + 1);
                 }
             }
