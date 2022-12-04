@@ -32,7 +32,7 @@
     const frag = document.createDocumentFragment();
     for (let i = 0; i < 30; i++) {
         let dd = document.createElement("div");
-        dd.classList.add("shade", "guess");
+        dd.classList.add("guess");
         frag.appendChild(dd);
     }
     document.getElementById("wordl-board-container").appendChild(frag);
@@ -42,7 +42,6 @@
     const fragment = document.createDocumentFragment();
     for (let i = 0; i < 28; i++) {
         let key = document.createElement("button");
-        key.classList.add("shade");
         key.innerText = layout[i].toUpperCase();
         key.addEventListener("click", executeClick);
         fragment.appendChild(key);
@@ -51,7 +50,7 @@
     document.getElementById("keyboard-container").appendChild(fragment);
 
     // Variables
-    def = `<a href='https://en.wiktionary.org/wiki/${word}' target='_blank'>Lookup this word on Wiktionary ↗</a>`;
+    def = `<a href='https://en.wiktionary.org/wiki/${word}' target='_blank'>Lookup ${word.toUpperCase()} on Wiktionary ↗</a>`;
     const letters = [];
     let row = 0;
     const cells = document.querySelectorAll(".board-container div");

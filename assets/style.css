@@ -135,8 +135,9 @@ button,
 .reload {
     border:none;
     margin:1px;
-    background-color: #22222255;
+    border:1px solid #111;
     color: #111;
+    background-color: transparent;
 }
 button {
     font-size:1.1rem;
