@@ -58,12 +58,20 @@ body {
 }
 #dn > td {
     font-size: 2rem;
+    width:16.66%;
 }
 #bars {
     height:7rem;
 }
 #bars > td {
     vertical-align: bottom;
+}
+.count {
+    color:#123;
+    z-index:101;
+    position:relative;
+    top:calc(-1rem - 5px);
+    font-size:.8rem;
 }
 #bars > td > span {
     display:block;

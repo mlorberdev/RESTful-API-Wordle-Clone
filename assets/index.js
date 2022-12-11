@@ -75,7 +75,11 @@
         const bbb = ["b1", "b2", "b3", "b4", "b5", "b6"];
         let ht = parseInt(document.getElementById("bars").style.height) * parseFloat(getComputedStyle(document.documentElement).fontSize);
         for (i in sss) document.getElementById(sss[i]).innerHTML = sx[i];
-        for (let i = 0; i < 6; i++) document.getElementById(bbb[i]).style.height = `${ht * parseInt(sx[i + 5]) / parseInt(sx[0])}px`; // set bars' inner height to % of plays
+        for (let i = 1; i < 7; i++) {
+            document.getElementById(`b${i}`).style.height = `${ht * parseInt(sx[i + 4]) / parseInt(sx[0])}px`; // set bars' inner height to % of plays
+            document.getElementById(`d${i}`).innerHTML = sx[i + 4];
+            
+        }
     } statsPageUpdate();
 
     // Gameplay
