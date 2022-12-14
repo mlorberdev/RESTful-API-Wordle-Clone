@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
-*{font-family:'Rubik';font-weight:900}
+
+* {
+    font-family: 'Rubik';
+    font-weight: 900
+}
+
 body {
     margin: 0;
     position: absolute;
@@ -9,90 +14,107 @@ body {
     height: 100vh;
     overflow: hidden;
     z-index: 0;
-    background-color:#ddd;
+    background-color: #ddd;
     transition: background-color 1s linear;
 }
+
 .err {
     background-color: #791919;
 }
+
 #statistics {
-    position:fixed;
-    top:0;
-    right:0;
-    cursor:pointer;
-    fill:#444;
-    margin:5px;
-    z-index:10;
+    position: fixed;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    fill: #444;
+    margin: 5px;
+    z-index: 10;
 }
+
 #stats {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    position:fixed;
-    top:0;
-    width:100vw;
-    height:100vh;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
     background-color: #eee;
-    z-index:9;
+    z-index: 9;
 }
-#sta > td {
-    padding:1rem;
+
+#sta>td {
+    padding: 1rem;
     font-style: italic;
 }
+
 .top {
-    width:50vw;
+    width: 50vw;
 }
-.big > td {
-    width:25%
+
+.big>td {
+    width: 25%
 }
+
 .big {
     font-size: 3rem;
     text-align: center;
 }
+
 .small {
     text-align: center;
 }
+
 #distro {
-    width:50vw;
+    width: 50vw;
     text-align: center;
 }
-#dn > td {
+
+#dn>td {
     font-size: 2rem;
-    width:16.66%;
+    width: 16.66%;
 }
+
 #bars {
-    height:7rem;
+    height: 7rem;
 }
-#bars > td {
+
+#bars>td {
     vertical-align: bottom;
 }
+
 .count {
-    color:#123;
-    z-index:101;
-    position:relative;
-    top:calc(-1rem - 5px);
-    font-size:.8rem;
+    color: #123;
+    z-index: 101;
+    position: relative;
+    top: calc(-1rem - 5px);
+    font-size: .8rem;
 }
-#bars > td > span {
-    display:block;
-    width:100%;
+
+#bars>td>span {
+    display: block;
+    width: 100%;
     background-color: #111;
-    color:transparent;
+    color: transparent;
 }
+
 .title {
-    padding:1rem;
+    padding: 1rem;
 }
+
 #reset {
-    position:fixed;
-    bottom:1rem;
-    left:1rem;
-    cursor:pointer;
-    padding:.5rem 1.2rem;
-    color:#eee;
+    position: fixed;
+    bottom: 1rem;
+    left: 1rem;
+    cursor: pointer;
+    padding: .5rem 1.2rem;
+    color: #eee;
     font-size: .7rem;
     background-color: #111;
-    border-radius:1.5rem;
+    border-radius: 1.5rem;
 }
+
 #keyboard-container {
     text-align: center;
     user-select: none;
@@ -102,16 +124,18 @@ body {
 
 button {
     width: 7%;
-    padding:5px;
+    padding: 5px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     position: relative;
+    font-size: 1.1rem;
 }
 
 .wide {
     width: 12%;
 }
+
 #board-wrapper {
     width: 100vw;
     height: 100vh;
@@ -127,7 +151,7 @@ button {
 
 .board-container div {
     font-size: 2.5rem;
-    padding:1rem;
+    padding: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -138,59 +162,73 @@ button {
     align-items: center;
     justify-content: center;
 }
+
 .guess,
 button,
 .reload {
-    border:none;
-    margin:1px;
-    border:1px solid #111;
+    border: none;
+    margin: 1px;
+    border: 1px solid #111;
     color: #111;
     background-color: transparent;
 }
-button {
-    font-size:1.1rem;
-}
+
 .reload,
 .big {
-    padding:1rem;
-    width:fit-content;
+    padding: 1rem;
+    width: fit-content;
     cursor: pointer;
 }
+
 .def {
     position: fixed;
     bottom: 1rem;
 }
+
 .big {
-    font-size:2rem;
+    font-size: 2rem;
 }
+
 .gray {
     background-color: #444;
-    color:#ddd;
+    color: #ddd;
 }
 
 .gold {
     background-color: #c9d42a;
-    color:#111;
+    color: #111;
 }
 
 .green {
     background-color: #397e0c;
-    color:#111;
+    color: #111;
 }
 
 #instructions {
-    cursor:default;
+    cursor: default;
     user-select: none;
     position: fixed;
     top: 20px;
     width: 100vw;
     text-align: center;
-    display:flex;
+    display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .instr {
-    padding:10px 15px;
-    border-radius:5px;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+@media only screen and (max-width: 768px) {
+    button {
+        width: 9%;
+        padding: 10px 5px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        font-size: 1.3rem;
+    }
 }
