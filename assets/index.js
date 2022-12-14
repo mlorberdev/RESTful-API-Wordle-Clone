@@ -38,16 +38,15 @@
     document.getElementById("wordl-board-container").appendChild(frag);
 
     // Keyboard Setup
-    let layout = ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "del", "a", "s", "d", "f", "g", "h", "j", "k", "l", "ent", "z", "x", "c", "v", "b", "n", "m"];
-    if (innerWidth < 768) layout = ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a", "s", "d", "f", "g", "h", "j", "k", "l", "ent", "z", "x", "c", "v", "b", "n", "m", "del"];
+    const layout = ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a", "s", "d", "f", "g", "h", "j", "k", "l", "ent", "z", "x", "c", "v", "b", "n", "m", "del"];
     const fragment = document.createDocumentFragment();
     for (let i = 0; i < 28; i++) {
         let key = document.createElement("button");
         key.innerText = layout[i].toUpperCase();
         key.addEventListener("click", executeClick);
         fragment.appendChild(key);
-        if (innerWidth < 768 && (layout[i] === "p" || layout[i] === "l")) fragment.appendChild(document.createElement("br"));
-        if (layout[i] === "del" || layout[i] === "ent") { key.classList.add("wide"); if (innerWidth > 768) fragment.appendChild(document.createElement("br")); }
+        if (layout[i] === "p" || layout[i] === "l") fragment.appendChild(document.createElement("br"));
+        if (layout[i] === "del" || layout[i] === "ent") { key.classList.add("wide");}
     }
     document.getElementById("keyboard-container").appendChild(fragment);
 
