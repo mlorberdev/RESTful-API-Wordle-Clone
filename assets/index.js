@@ -131,7 +131,6 @@
 						}
 					}
 					for (k in c) {
-						console.log(c[k][1]);
 						if (n === 1 && c[k][1] === "green") colors[i] = "gray";
 					}
 				}
