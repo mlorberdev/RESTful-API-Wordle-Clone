@@ -11,7 +11,7 @@
 	// }
 
 	// Load random word from dictionary and analyze
-	let word = [...words[Math.floor(Math.random() * words.length)]]; // pulls from words.js
+	let word = words[Math.floor(Math.random() * words.length)]; // pulls from words.js
 	
 	// Merriam-Webster API Call (for word definition)
 	// const Http = new XMLHttpRequest();
