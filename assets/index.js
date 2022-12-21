@@ -131,7 +131,7 @@
 						}
 					}
 					for (k in c) {
-						if (n === 1 && c[k][1] === "green") colors[i] = "gray";
+						if (n === 1 && c[k][1] === ("green" || "gold")) colors[i] = "gray";
 					}
 				}
 			}
