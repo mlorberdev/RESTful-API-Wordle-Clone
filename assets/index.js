@@ -25,7 +25,7 @@
 	document.getElementById("keyboard-container").appendChild(fragment);
 
 	// Variables
-	def = `<a href='https://en.wiktionary.org/wiki/${word.join("")}' target='_blank'>Lookup ${word.join("").toUpperCase()} on Wiktionary ↗</a>`;
+	let def = `<a href='https://en.wiktionary.org/wiki/${word.join("")}' target='_blank'>Lookup ${word.join("").toUpperCase()} on Wiktionary ↗</a>`;
 	const letters = [];
 	let row = 0;
 	const cells = document.querySelectorAll(".board-container div");
