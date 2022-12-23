@@ -5,11 +5,12 @@ This is a fully functional [Wordle®](https://en.wikipedia.org/wiki/Wordle) clon
 [Deployed on Netlify](https://wrdl-with-restful-api.netlify.app/)
 
 ## Script Abstract:
-1. Gameboard and keyboard generation: random word selection
+1. Random word selection
+1. Gameboard and keyboard generation
 1. Binary search for valid entry on each guess
-1. Check for correct word or letters in guess
-1. Color classes added to gameboard and keyboard
-1. Show word link to Wiktionary; update statistics
+1. Evaluate guess and apply colors to DOM
+1. Check for win condition and update DOM
+1. Update statistics
 
 ## Screenshots
 
