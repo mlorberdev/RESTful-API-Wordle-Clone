@@ -1,1 +1,148 @@
-!function () { let e = [...words[Math.floor(Math.random() * words.length)]]; e = [..."awash"]; const t = document.createDocumentFragment(); for (let e = 0; e < 30; e++) { let e = document.createElement("div"); e.classList.add("guess"), t.appendChild(e) } document.getElementById("wordl-board-container").appendChild(t); const n = ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a", "s", "d", "f", "g", "h", "j", "k", "l", "ent", "z", "x", "c", "v", "b", "n", "m", "del"], o = document.createDocumentFragment(); for (let e = 0; e < 28; e++) { let t = document.createElement("button"); t.innerText = n[e].toUpperCase(), t.addEventListener("click", m), o.appendChild(t), "p" !== n[e] && "l" !== n[e] || o.appendChild(document.createElement("br")), "del" !== n[e] && "ent" !== n[e] || t.classList.add("wide") } document.getElementById("keyboard-container").appendChild(o), def = `<a href='https://en.wiktionary.org/wiki/${e.join("")}' target='_blank'>Lookup ${e.join("").toUpperCase()} on Wiktionary ↗</a>`; const d = []; let l = 0; const r = document.querySelectorAll(".board-container div"), s = document.querySelectorAll("button"), a = document.getElementById("stats"); let c; function u() { c = localStorage.getItem("statistics").split(","), c.forEach((e => parseInt(e))); const e = ["pl", "wo", "wp", "cs", "ms", "d1", "d2", "d3", "d4", "d5", "d6"]; let t = parseInt(document.getElementById("bars").style.height) * parseFloat(getComputedStyle(document.documentElement).fontSize); for (i in e) document.getElementById(e[i]).innerHTML = c[i]; for (let e = 1; e < 7; e++)document.getElementById(`b${e}`).style.height = t * parseInt(c[e + 4]) / parseInt(c[0]) + "px", document.getElementById(`d${e}`).innerHTML = c[e + 4] } function m() { const t = this.innerText; switch (t) { case "ENT": if (5 * l + 5 !== d.length) return; !function () { let t = d.slice(-5); const o = e => { let t = 8635, n = 0, o = 0; for (; n <= t;) { if (o = Math.floor((t + n) / 2), words[o] === e) return !0; e > words[o] ? n = o + 1 : t = o - 1 } return !1 }; if (!1 === o(t.join(""))) return l--, void a(); c(); function a() { document.body.classList.add("err"), setTimeout((() => document.body.classList.remove("err")), 300) } function c() { let o = [!1, !1, !1, !1, !1]; for (i in t) e.includes(t[i]) && (e[i] === t[i] ? o[i] = "green" : o[i] = "gold"); function d() { for (i in o) if ("gold" === o[i]) { let n = [], l = [], r = []; for (j in t) { let d = e[j] === t[i], s = t[i] === t[j]; s && "gold" === o[j] && l.push(j), d && r.push(j), s && "green" === o[j] && n.push(j) } D = l.filter((e => !n.includes(e))), D.length + n.length > r.length && (o[D[Math.floor(Math.random() * D.length)]] = "gray", d()) } } for (i in o.indexOf("gold") >= 0 && d(), o) !1 === o[i] && (o[i] = "gray"); for (let e = 0; e < 5; e++)s[n.indexOf(t[e])].classList.add(o[e]), r[5 * l + e].classList.add(o[e]) } if ((5 === l || t.join("") === e.join("")) && (s.forEach((e => e.removeEventListener("click", m))), 5 === l && t.join("") !== e.join("") && (document.getElementById("instructions").innerHTML = `<div class='shade reload' onclick='location.reload()'>The word was ${e.join("").toUpperCase()}.<br>Play again?</div><div class='def'>${def}</div>`, g(!1)), t.join("") === e.join(""))) { let e = 0 === l ? "try" : "tries"; document.getElementById("instructions").innerHTML = `<div class='shade reload' onclick='location.reload()'>You got it in ${l + 1} ${e}!<br>Play again?</div><div class='def'>${def}</div>`, g(!0, l + 1) } }(), l++; break; case "DEL": if (5 * l === d.length) return; d.pop(), r[d.length].innerText = ""; break; default: if (5 * l + 5 === d.length) return; r[d.length].innerText = t, d.push(t.toLowerCase()) } } function g(e, t) { c[0]++, !0 === e ? (c[1]++, c[3]++, c[3] > c[4] && (c[4] = c[3])) : c[3] = 0, c[2] = `${(100 * c[1] / c[0]).toFixed(0)}%`, t > 0 && c[c.length - 7 + t]++, localStorage.setItem("statistics", c), u() } function f() { localStorage.setItem("statistics", [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), u() } null === localStorage.getItem("statistics") && f(), u(), document.getElementById("statistics").addEventListener("click", (() => "none" === a.style.display ? a.style.display = "flex" : a.style.display = "none")), document.getElementById("reset").addEventListener("click", f) }();
+!(function () {
+
+	// Select word
+	let word = [...words[Math.floor(Math.random() * words.length)]]; // pulls from words.js
+	// Board setup
+	const frag = document.createDocumentFragment();
+	for (let i = 0; i < 30; i++) {
+		let dd = document.createElement("div");
+		dd.classList.add("guess");
+		frag.appendChild(dd);
+	}
+	document.getElementById("wordl-board-container").appendChild(frag);
+
+	// Keyboard Setup
+	const layout = ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a", "s", "d", "f", "g", "h", "j", "k", "l", "ent", "z", "x", "c", "v", "b", "n", "m", "del"];
+	const fragment = document.createDocumentFragment();
+	for (let i = 0; i < 28; i++) {
+		let key = document.createElement("button");
+		key.innerText = layout[i].toUpperCase();
+		key.addEventListener("click", executeClick);
+		fragment.appendChild(key);
+		if (layout[i] === "p" || layout[i] === "l") fragment.appendChild(document.createElement("br"));
+		if (layout[i] === "del" || layout[i] === "ent") { key.classList.add("wide"); }
+	}
+	document.getElementById("keyboard-container").appendChild(fragment);
+
+	// Variables
+	def = `<a href='https://en.wiktionary.org/wiki/${word.join("")}' target='_blank'>Lookup ${word.join("").toUpperCase()} on Wiktionary ↗</a>`;
+	const letters = [];
+	let row = 0;
+	const cells = document.querySelectorAll(".board-container div");
+	const buttons = document.querySelectorAll("button");
+	const stats = document.getElementById("stats");
+	let sx;
+
+	if (localStorage.getItem("statistics") === null) resetStats(); // for first-time user
+
+	// Update stats page
+	function statsPageUpdate() {
+		sx = localStorage.getItem("statistics").split(",");
+		sx.forEach(e => e = parseInt(e)); // change text to integer
+		const sss = ["pl", "wo", "wp", "cs", "ms", "d1", "d2", "d3", "d4", "d5", "d6"];
+		let ht = parseInt(document.getElementById("bars").style.height) * parseFloat(getComputedStyle(document.documentElement).fontSize);
+		for (i in sss) document.getElementById(sss[i]).innerHTML = sx[i];
+		for (let i = 1; i < 7; i++) {
+			document.getElementById(`b${i}`).style.height = `${ht * parseInt(sx[i + 4]) / parseInt(sx[0])}px`; // set bars' inner height to % of plays
+			document.getElementById(`d${i}`).innerHTML = sx[i + 4];
+		}
+	} statsPageUpdate();
+
+	// Gameplay
+	function executeClick() {
+		const key = this.innerText;
+		switch (key) {
+			case "ENT": if (5 * row + 5 !== letters.length) return; else { evalGuess(); row++ } break;
+			case "DEL": if (5 * row === letters.length) return; else { letters.pop(); cells[letters.length].innerText = ""; } break;
+			default: if (5 * row + 5 === letters.length) return; else { cells[letters.length].innerText = key; letters.push(key.toLowerCase()); } break;
+		}
+		// Eval guess
+		function evalGuess() {
+			let gg = letters.slice(-5);
+			const isValidGuess = (x) => {
+				let hi = 8635;
+				let lo = 0;
+				let mm = 0;
+				while (lo <= hi) {
+					mm = Math.floor((hi + lo) / 2);
+					if (words[mm] === x) return true;
+					else if (x > words[mm]) lo = mm + 1;
+					else hi = mm - 1;
+				}
+				return false;
+			}
+			// Alert invalid guess
+			if (isValidGuess(gg.join("")) === false) { row--; invalidGuess(); return }
+			else { evalColors(); }
+			function invalidGuess() { document.body.classList.add("err"); setTimeout(() => document.body.classList.remove("err"), 300); }
+
+			// Evaluate colors & apply to board & keyboard
+			function evalColors() {
+				let colors = [false, false, false, false, false];
+				for (i in gg) if (word.includes(gg[i])) word[i] === gg[i] ? colors[i] = "green" : colors[i] = "gold";
+				if (colors.indexOf("gold") >= 0) evalGold();
+				function evalGold() {
+					for (i in colors) {
+						if (colors[i] === "gold") {
+							let N = [], G = [], W = [];
+							for (j in gg) {
+								let ww = word[j] === gg[i], gs = gg[i] === gg[j];
+								if (gs && colors[j] === "gold") G.push(j);
+								if (ww) W.push(j);
+								if (gs && colors[j] === "green") N.push(j);
+							}
+							D = G.filter(l => !N.includes(l));
+							if (D.length + N.length > W.length) {
+								colors[D[Math.floor(Math.random() * D.length)]] = "gray";
+								evalGold();
+							}
+						}
+					}
+				}
+				for (i in colors) if (colors[i] === false) colors[i] = "gray";
+				// apply colors
+				for (let i = 0; i < 5; i++) {
+					buttons[layout.indexOf(gg[i])].classList.add(colors[i]);
+					cells[5 * row + i].classList.add(colors[i]);
+				}
+			}
+
+			// Check win/loss condition
+			if (row === 5 || gg.join("") === word.join("")) {
+				buttons.forEach(button => button.removeEventListener("click", executeClick));
+				if (row === 5 && gg.join("") !== word.join("")) {
+					document.getElementById("instructions").innerHTML = `<div class='shade reload' onclick='location.reload()'>The word was ${word.join("").toUpperCase()}.<br>Play again?</div><div class='def'>${def}</div>`;
+					updateStats(false);
+				}
+				if (gg.join("") === word.join("")) {
+					let tt = row === 0 ? "try" : "tries";
+					document.getElementById("instructions").innerHTML = `<div class='shade reload' onclick='location.reload()'>You got it in ${row + 1} ${tt}!<br>Play again?</div><div class='def'>${def}</div>`;
+					updateStats(true, row + 1);
+				}
+			}
+		}
+	}
+
+	// Show/Hide Statistics
+	document.getElementById("statistics").addEventListener("click", () => stats.style.display === "none" ? stats.style.display = "flex" : stats.style.display = "none");
+
+	// Update Statistics (note: localstorage sx -> "played, won, win%, curr streak, max streak, distribution (6)")
+	function updateStats(win, row) {
+		sx[0]++; // number played
+		if (win === true) {
+			sx[1]++; // wins
+			sx[3]++; // curr streak
+			if (sx[3] > sx[4]) sx[4] = sx[3]; // max streak update
+		} else {
+			sx[3] = 0; // reset current streak to 0
+		}
+		sx[2] = `${(100 * sx[1] / sx[0]).toFixed(0)}%`; // win pct
+		if (row > 0) sx[sx.length - 7 + row]++; // distribution update
+		localStorage.setItem("statistics", sx); // update localStorage (statistics)
+		statsPageUpdate();
+	}
+
+	// Reset Statistics
+	document.getElementById("reset").addEventListener("click", resetStats);
+	function resetStats() { localStorage.setItem("statistics", [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]); statsPageUpdate(); }
+})();
