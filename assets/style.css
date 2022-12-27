@@ -143,10 +143,11 @@ button {
 }
 
 .board-container {
+    margin-top: 10vh;
     display: grid;
     gap: 1px;
-    grid-template-columns: 4rem 4rem 4rem 4rem 4rem;
-    grid-template-rows: 4rem 4rem 4rem 4rem 4rem 4rem;
+    grid-template-columns: 16vw 16vw 16vw 16vw 16vw 16vw;
+    grid-template-rows: 16vw 16vw 16vw 16vw 16vw 16vw;
 }
 
 .board-container div {
@@ -229,6 +230,14 @@ button,
         align-items: center;
         justify-content: center;
         position: relative;
-        font-size: 1.3rem;
+        font-size: 1rem;
+    }
+
+    #keyboard-container {
+        padding-top: 0rem;
+    }
+
+    .board-container div {
+        font-size: 2rem;
     }
 }
