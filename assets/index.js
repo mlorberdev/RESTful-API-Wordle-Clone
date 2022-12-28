@@ -9,7 +9,7 @@
 		dd.classList.add("guess");
 		frag.appendChild(dd);
 	}
-	document.getElementById("wordl-board-container").appendChild(frag);
+	document.getElementById("board-container").appendChild(frag);
 
 	// Keyboard Setup
 	const layout = ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a", "s", "d", "f", "g", "h", "j", "k", "l", "ent", "z", "x", "c", "v", "b", "n", "m", "del"];
@@ -25,7 +25,7 @@
 	document.getElementById("keyboard-container").appendChild(fragment);
 
 	// Variables
-	let def = `<a href='https://en.wiktionary.org/wiki/${word.join("")}' target='_blank'>Lookup ${word.join("").toUpperCase()} on Wiktionary ↗</a>`;
+	let def = `<a id='def' href='https://en.wiktionary.org/wiki/${word.join("")}' target='_blank'>Lookup ${word.join("").toUpperCase()} on Wiktionary ↗</a>`;
 	const letters = [];
 	let row = 0;
 	const cells = document.querySelectorAll(".board-container div");
@@ -111,12 +111,12 @@
 			if (row === 5 || gg.join("") === word.join("")) {
 				buttons.forEach(button => button.removeEventListener("click", executeClick));
 				if (row === 5 && gg.join("") !== word.join("")) {
-					document.getElementById("instructions").innerHTML = `<div class='shade reload' onclick='location.reload()'>The word was ${word.join("").toUpperCase()}.<br>Play again?</div><div class='def'>${def}</div>`;
+					document.getElementById("instructions").innerHTML = `<div onclick='location.reload()'>The word was ${word.join("").toUpperCase()}! Play again?</div><div class='def'>${def}</div>`;
 					updateStats(false);
 				}
 				if (gg.join("") === word.join("")) {
 					let tt = row === 0 ? "try" : "tries";
-					document.getElementById("instructions").innerHTML = `<div class='shade reload' onclick='location.reload()'>You got it in ${row + 1} ${tt}!<br>Play again?</div><div class='def'>${def}</div>`;
+					document.getElementById("instructions").innerHTML = `<div onclick='location.reload()'>You got it in ${row + 1} ${tt}! Play again?</div><div class='def'>${def}</div>`;
 					updateStats(true, row + 1);
 				}
 			}

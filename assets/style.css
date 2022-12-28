@@ -16,10 +16,12 @@ body {
     z-index: 0;
     background-color: #ddd;
     transition: background-color 1s linear;
+    display:flex;
+    justify-content: center;
 }
 
 .err {
-    background-color: #ac1e1e;
+    background-color: #303030;
 }
 
 #statistics {
@@ -27,7 +29,7 @@ body {
     top: 0;
     right: 0;
     cursor: pointer;
-    fill: #444;
+    fill: #666;
     margin: 5px;
     z-index: 10;
 }
@@ -137,14 +139,18 @@ button {
 }
 
 #board-wrapper {
-    width: 100vw;
-    height: 100vh;
-    flex-flow: column;
+    display:flex;
+    width:calc(100vw - 20px);
+    height:70vh;
+    align-items: center;
+    position:fixed;
+    left:0;
+    padding:25px 10px;
 }
 
 .board-container {
+    margin-top:25px;
     --w: 5rem;
-    margin-top: 10vh;
     display: grid;
     gap: 1px;
     grid-template-columns: var(--w) var(--w) var(--w) var(--w) var(--w);
@@ -162,16 +168,14 @@ button {
 .flex {
     display: flex;
     align-items: center;
-    justify-content: center;
 }
 
 .guess,
-button,
-.reload {
+button {
     border: none;
     margin: 1px;
-    border: 1px solid #111;
-    color: #111;
+    border: 1px solid #666;
+    color: #666;
     background-color: transparent;
 }
 
@@ -182,40 +186,44 @@ button,
     cursor: pointer;
 }
 
-.def {
-    position: fixed;
-    bottom: 1rem;
-}
-
 .big {
     font-size: 2rem;
 }
 
 .gray {
-    background-color: #444;
+    background-color: #666;
     color: #ddd;
 }
 
 .gold {
-    background-color: #c9d42a;
-    color: #111;
+    background-color: #d8e26b;
+    color: #444;
 }
 
 .green {
-    background-color: #397e0c;
-    color: #111;
+    background-color: #7da860;
+    color: #333;
 }
 
 #instructions {
+    width:100vw;
+    text-align: center;
     cursor: default;
     user-select: none;
     position: fixed;
-    top: 20px;
-    width: 100vw;
-    text-align: center;
+    top:0;
     display: flex;
-    align-items: center;
     justify-content: center;
+    z-index: 100;
+}
+.def {
+    position: fixed;
+    bottom:0;
+}
+.def > a,
+.def > a:visited {
+    color:#666;
+    font-size:.75rem;
 }
 
 .instr {
@@ -226,7 +234,7 @@ button,
 @media only screen and (max-width: 768px) {
     button {
         width: 9%;
-        padding: 13px 5px;
+        padding: 12px 5px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -245,7 +253,7 @@ button,
 
     .board-container {
         --w: 3rem;
-        position:fixed !important;
+        position:fixed;
         top:0;
     }
 
