@@ -17,7 +17,9 @@ body {
     background-color: #ddd;
     transition: background-color 1s linear;
     display:flex;
+    align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
 .err {
@@ -231,7 +233,7 @@ button {
     border-radius: 5px;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 450px) {
     button {
         width: 9%;
         padding: 12px 5px;
@@ -252,9 +254,9 @@ button {
     }
 
     .board-container {
-        --w: 3rem;
+        --w: calc(20vw - 3px);
         position:fixed;
-        top:0;
+        top:50px;
     }
 
     #statistics {
