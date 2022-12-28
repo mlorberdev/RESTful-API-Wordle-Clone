@@ -264,3 +264,35 @@ button {
         transform:scale(.5);
     }
 }
+
+@media only screen and (max-height: 650px) {
+    button {
+        width: 9%;
+        padding: 10px 5px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        font-size: 1rem;
+    }
+
+    #keyboard-container {
+        position: fixed;
+        bottom: 20px;
+    }
+
+    .board-container div {
+        font-size: 2rem;
+    }
+
+    .board-container {
+        --w: calc(20vw - 9px);
+        position: fixed;
+        top: 0px;
+    }
+
+    #statistics {
+        transform-origin: top right;
+        transform: scale(.5);
+    }
+}
