@@ -244,16 +244,13 @@ button,
     }
 
     .board-container {
-        position:fixed;
-        top:10px;
-        display: grid;
-        gap: 1px;
-        grid-template-columns: 16vw 16vw 16vw 16vw 16vw 16vw;
-        grid-template-rows: 16vw 16vw 16vw 16vw 16vw 16vw;
+        --w: 3rem;
+        position:fixed !important;
+        top:0;
     }
 
     #statistics {
         transform-origin:top right;
-        transform:scale(.7);
+        transform:scale(.5);
     }
 }
