@@ -143,11 +143,12 @@ button {
 }
 
 .board-container {
+    --w: 5rem;
     margin-top: 10vh;
     display: grid;
     gap: 1px;
-    grid-template-columns: 16vw 16vw 16vw 16vw 16vw 16vw;
-    grid-template-rows: 16vw 16vw 16vw 16vw 16vw 16vw;
+    grid-template-columns: var(--w) var(--w) var(--w) var(--w) var(--w);
+    grid-template-rows: var(--w) var(--w) var(--w) var(--w) var(--w) var(--w);
 }
 
 .board-container div {
@@ -234,10 +235,25 @@ button,
     }
 
     #keyboard-container {
-        padding-top: 0rem;
+        position:fixed;
+        bottom:20px;
     }
 
     .board-container div {
         font-size: 2rem;
+    }
+
+    .board-container {
+        position:fixed;
+        top:10px;
+        display: grid;
+        gap: 1px;
+        grid-template-columns: 16vw 16vw 16vw 16vw 16vw 16vw;
+        grid-template-rows: 16vw 16vw 16vw 16vw 16vw 16vw;
+    }
+
+    #statistics {
+        transform-origin:top right;
+        transform:scale(.7);
     }
 }
