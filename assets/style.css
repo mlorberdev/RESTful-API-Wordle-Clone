@@ -265,7 +265,7 @@ button {
     }
 }
 
-@media only screen and (max-height: 650px) {
+@media only screen and (max-width: 650px) {
     button {
         width: 9%;
         padding: 10px 5px;
