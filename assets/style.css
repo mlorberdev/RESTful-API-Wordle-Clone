@@ -152,7 +152,7 @@ button {
 
 .board-container {
     margin-top:25px;
-    --w: 5rem;
+    --w: calc(min(4rem, 10vw, 10vh));
     display: grid;
     gap: 1px;
     grid-template-columns: var(--w) var(--w) var(--w) var(--w) var(--w);
