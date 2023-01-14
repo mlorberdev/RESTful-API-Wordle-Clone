@@ -286,7 +286,7 @@ button {
     }
 
     .board-container {
-        --w: calc(20vw - 9px);
+        --w: calc(15vw - 9px);
         position: fixed;
         top: 0px;
     }
