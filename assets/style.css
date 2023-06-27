@@ -29,8 +29,8 @@ body {
 }
 
 @keyframes shake {
-    from {transform:translateX(-4px)}
-    to {transform:translateX(4px)}
+    from {transform:translateX(-5px)}
+    to {transform:translateX(5px)}
 }
 
 #statistics {
@@ -243,7 +243,7 @@ button {
 @media only screen and (max-width: 450px) {
     button {
         width: 9%;
-        padding: 12px 5px;
+        padding: 16px 5px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -275,7 +275,7 @@ button {
 @media only screen and (max-width: 650px) {
     button {
         width: 9%;
-        padding: 10px 5px;
+        padding: 15px 5px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
