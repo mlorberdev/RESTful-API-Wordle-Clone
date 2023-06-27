@@ -2,6 +2,7 @@
 
 	// Select word
 	let word = [...words[Math.floor(Math.random() * words.length)]]; // pulls from words.js
+	
 	// Board setup
 	const frag = document.createDocumentFragment();
 	for (let i = 0; i < 30; i++) {
@@ -71,10 +72,15 @@
 				}
 				return false;
 			}
-			// Alert invalid guess
+			// Alert invalid guess 
 			if (isValidGuess(gg.join("")) === false) { row--; invalidGuess(); return }
 			else { evalColors(); }
-			function invalidGuess() { document.body.classList.add("err"); setTimeout(() => document.body.classList.remove("err"), 300); }
+			function invalidGuess() {
+				console.log(row, cells[letters.length]);
+				// document.body.classList.add("err");
+				document.getElementById("board-container").classList.add("err");
+				setTimeout(() => document.getElementById("board-container").classList.remove("err"), 300);
+			}
 
 			// Evaluate colors & apply to board & keyboard
 			function evalColors() {
