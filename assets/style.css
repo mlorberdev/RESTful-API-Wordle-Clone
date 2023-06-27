@@ -29,8 +29,8 @@ body {
 }
 
 @keyframes shake {
-    from {transform:translateX(-2px)}
-    to {transform:translateX(2px)}
+    from {transform:translateX(-4px)}
+    to {transform:translateX(4px)}
 }
 
 #statistics {
