@@ -186,6 +186,7 @@ button {
     border: 1px solid #666;
     color: #666;
     background-color: transparent;
+    transition:background-color .2s linear;
 }
 
 .reload,

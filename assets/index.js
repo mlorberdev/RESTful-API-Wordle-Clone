@@ -108,10 +108,13 @@
 					}
 				}
 				for (i in colors) if (colors[i] === false) colors[i] = "gray";
+				
 				// apply colors
 				for (let i = 0; i < 5; i++) {
-					buttons[layout.indexOf(gg[i])].classList.add(colors[i]);
-					cells[5 * row + i].classList.add(colors[i]);
+					// setTimeout(() => {
+						buttons[layout.indexOf(gg[i])].classList.add(colors[i]);
+						cells[5 * row + i].classList.add(colors[i]);
+					// }, 150 * i);
 				}
 			}
 
