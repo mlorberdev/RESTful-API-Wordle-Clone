@@ -109,12 +109,13 @@
 				}
 				for (i in colors) if (colors[i] === false) colors[i] = "gray";
 				
-				// apply colors
+				// apply colors & styles
 				for (let i = 0; i < 5; i++) {
-					// setTimeout(() => {
+					setTimeout(() => {
 						buttons[layout.indexOf(gg[i])].classList.add(colors[i]);
-						cells[5 * row + i].classList.add(colors[i]);
-					// }, 150 * i);
+						cells[5 * (row - 1) + i].classList.add(colors[i], "flip");
+						setTimeout(() => cells[5 * (row - 1) + i].classList.add(colors[i], "rect"), 100);
+					}, 100 * i);
 				}
 			}
 
