@@ -189,7 +189,7 @@ button {
 }
 
 .flip {
-    transition:transform .2s linear;
+    transition:transform .4s linear;
     transform:rotateX(180deg);
 }
 

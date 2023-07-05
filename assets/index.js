@@ -108,15 +108,18 @@
 					}
 				}
 				for (i in colors) if (colors[i] === false) colors[i] = "gray";
-				
+
 				// apply colors & styles
+				let delay;
+				gg.join("") === word.join("") ? delay = 0 : delay = 100;
 				for (let i = 0; i < 5; i++) {
 					setTimeout(() => {
 						buttons[layout.indexOf(gg[i])].classList.add(colors[i]);
 						cells[5 * (row - 1) + i].classList.add(colors[i], "flip");
-						setTimeout(() => cells[5 * (row - 1) + i].classList.add(colors[i], "rect"), 100);
-					}, 100 * i);
+						setTimeout(() => cells[5 * (row - 1) + i].classList.add(colors[i], "rect"), 200);
+					}, delay * i);
 				}
+
 			}
 
 			// Check win/loss condition
